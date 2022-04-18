@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
     "env": {
         "browser": true,
@@ -5,9 +6,11 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:vue/essential",
+        "plugin:vue/vue3-essential",
+        "plugin:vue/vue3-recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "ecmaVersion": "latest",
         "parser": "@typescript-eslint/parser",

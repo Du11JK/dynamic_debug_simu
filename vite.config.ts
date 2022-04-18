@@ -1,9 +1,11 @@
-import {defineConfig} from 'vite'
 import VuePlugin from '@vitejs/plugin-vue'
 import plugin, { Mode } from 'vite-plugin-markdown'
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    VuePlugin(),
-    plugin({ mode: [Mode.HTML, Mode.TOC, Mode.VUE] })],
-})
+
+/**
+ * @type { import('vite').UserConfig }
+ */
+const config = {
+  plugins: [VuePlugin(), plugin({ mode: [Mode.HTML, Mode.TOC, Mode.VUE] })],
+}
+
+module.exports = config
