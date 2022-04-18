@@ -18,6 +18,7 @@ import {
   CodeSlashOutline as DebugAsmIcon,
   SwapVerticalOutline as DebugNetIcon,
   ScanOutline as DebugStaticIcon,
+  FileTrayOutline as DebugMemIcon,
   InformationOutline as AboutInfoIcon
 } from "@vicons/ionicons5";
 
@@ -125,6 +126,20 @@ const menuOptions: MenuOption[] = [
           ),
         key: "debug_static",
         icon: renderIcon(DebugStaticIcon),
+      },
+      {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                  to: {
+                    path: "/debug_mem",
+                  },
+                },
+                { default: () => "内存布局" }
+            ),
+        key: "debug_mem",
+        icon: renderIcon(DebugMemIcon),
       },
     ],
   },

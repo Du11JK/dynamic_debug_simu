@@ -39,6 +39,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/DebugStatic.vue"), 
     },
     {
+        path: "/debug_mem",
+        name: "debug_mem",
+        component: () => import("../views/DebugMemoryMap.vue"),
+    },
+    {
         path: "/about_info",
         name: "about_info",
         component: () => import("../views/About.vue"), 
