@@ -44,9 +44,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/DebugMemoryMap.vue"),
     },
     {
+        path: "/debug_symbols",
+        name: "debug_symbols",
+        component: () => import("../views/DebugSymbols.vue"),
+    },
+    {
         path: "/about_info",
         name: "about_info",
-        component: () => import("../views/About.vue"), 
+        component: () => import("../views/AboutInfo.vue"),
     },
 ]
 
