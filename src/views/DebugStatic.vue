@@ -1,7 +1,13 @@
 <template>
-  <div>DEBUGSTATIC</div>
+  <StaticInfo />
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+import StaticInfo from "../components/StaticInfo.vue";
+
+export default {
+  components: {StaticInfo}
+}
+</script>
 
 <style scoped></style>

@@ -1,10 +1,12 @@
 <template>
-  <p>mem</p>
+  <MemMap />
 </template>
 
 <script>
+import MemMap from "../components/MemMap.vue";
 export default {
-  name: "DebugMemoryMap"
+  name: "DebugMemoryMap",
+  components: {MemMap}
 }
 </script>
 
