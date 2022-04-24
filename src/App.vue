@@ -15,7 +15,12 @@
         <MenuSideBar />
       </n-layout-sider>
       <n-layout content-style="padding: 24px;">
-        <router-view />
+        <n-layout-header style="height: 24px" bordered>
+          <StepNext />
+        </n-layout-header>
+        <n-layout-content style="top: 48px">
+          <router-view />
+        </n-layout-content>
       </n-layout>
     </n-layout>
   </n-layout>
@@ -23,6 +28,8 @@
 
 <script lang="ts" setup>
 import MenuSideBar from "./components/MenuSideBar.vue";
+import StepNext from "./components/StepNext.vue";
+
 </script>
 
 <style scoped>

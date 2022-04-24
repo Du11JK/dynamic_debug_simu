@@ -19,7 +19,8 @@ import {
   SwapVerticalOutline as DebugNetIcon,
   ScanOutline as DebugStaticIcon,
   FileTrayOutline as DebugMemIcon,
-  InformationOutline as AboutInfoIcon
+  InformationOutline as AboutInfoIcon,
+  ReaderOutline as DebugSymbolsIcon
 } from "@vicons/ionicons5";
 
 function renderIcon(icon: Component) {
@@ -140,6 +141,20 @@ const menuOptions: MenuOption[] = [
             ),
         key: "debug_mem",
         icon: renderIcon(DebugMemIcon),
+      },
+      {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                  to: {
+                    path: "/debug_symbols",
+                  },
+                },
+                { default: () => "符号" }
+            ),
+        key: "debug_symbols",
+        icon: renderIcon(DebugSymbolsIcon),
       },
     ],
   },

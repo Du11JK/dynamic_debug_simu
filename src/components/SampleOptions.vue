@@ -25,17 +25,45 @@ export default {
       value: ref(null),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
-          value: 'song0',
-          disabled: true
+          label: "入门案例",
+          value: 'sample1',
+          disabled: false
         },
         {
-          label: 'Drive My Car',
-          value: 'song1'
+          label: '简单PE壳',
+          value: 'sample2'
         },
         {
-          label: 'Norwegian Wood',
-          value: 'song2'
+          label: 'UPX',
+          value: 'sample3'
+        },
+        {
+          label: 'ASProtect',
+          value: 'sample4'
+        },
+        {
+          label: '反虚拟机技术示范',
+          value: 'sample5'
+        },
+        {
+          label: '反调试技术示范',
+          value: 'sample6'
+        },
+        {
+          label: '彩虹猫',
+          value: 'sample7'
+        },
+        {
+          label: '熊猫烧香',
+          value: 'sample8'
+        },
+        {
+          label: 'WannaCry',
+          value: 'sample9'
+        },
+        {
+          label: '最新蠕虫样本',
+          value: 'sample10'
         },
 
       ]

@@ -18,6 +18,7 @@
         <n-anchor-link title="反汇编和堆栈" href="#debug_asm" />
         <n-anchor-link title="静态解析" href="#debug_static" />
         <n-anchor-link title="网络信息" href="#debug_net" />
+        <n-anchor-link title="符号" href="#debug_symbols" />
       </n-anchor-link>
       <n-anchor-link title="关于" href="#other_info" />
     </n-anchor>
