@@ -1,6 +1,6 @@
 <script>
 const sample_name = 'test';
-const step_index = 1;
+const step_index = 0;
 
 export default {
   sample_name,

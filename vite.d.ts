@@ -16,3 +16,4 @@ declare module '*.md' {
     // Modify below per your usage
     export { attributes, toc, html, VueComponent, VueComponentWith };
 }
+declare module 'vue3-eventbus'

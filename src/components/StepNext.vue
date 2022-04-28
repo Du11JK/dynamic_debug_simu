@@ -24,7 +24,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import global from '../GlobalVar.vue'
-import HelpModal from "./HelpModal.vue";
+import HelpModal from "./preview/HelpModal.vue";
+import bus from 'vue3-eventbus'
 export default defineComponent({
   name: "StepNext",
   components: {HelpModal},
@@ -46,15 +47,16 @@ emits: ['step_update'],
       if(global.step_index > 1) {
         global.step_index -= 1;
       }
-      this.$emit("step_update")
+      bus.emit("step_update")
     },
     handleNextStep() {
       global.step_index += 1;
-      this.$emit("step_update")
+      bus.emit("step_update")
     },
     handleResetSample() {
       global.step_index = 1;
-      this.$emit("step_update")
+      bus.emit("step_update")
+
     },
     handleHelpInfo() {
       console.info('handle');
