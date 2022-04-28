@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import StaticInfo from "../components/StaticInfo.vue";
+import StaticInfo from "../components/preview/StaticInfo.vue";
 
 export default {
   components: {StaticInfo}

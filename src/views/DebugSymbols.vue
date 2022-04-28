@@ -4,7 +4,7 @@
 
 <script>
 
-import SymbolsInfo from "../components/SymbolsInfo.vue";
+import SymbolsInfo from "../components/preview/SymbolsInfo.vue";
 export default {
   name: "DebugSymbols",
   components: {SymbolsInfo},

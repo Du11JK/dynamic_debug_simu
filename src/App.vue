@@ -16,7 +16,7 @@
       </n-layout-sider>
       <n-layout content-style="padding: 24px;">
         <n-layout-header style="height: 24px" bordered>
-          <StepNext />
+          <StepNext @step_update="updata_data_prev" />
         </n-layout-header>
         <n-layout-content style="top: 48px">
           <router-view />

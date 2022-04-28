@@ -1,5 +1,5 @@
 <template>
-  <n-grid :x-gap="12" :y-gap="8" :cols="5" style="height: 90%">
+  <n-grid :x-gap="12" :y-gap="8" :cols="5" style="height: 100%">
     <n-grid-item span="3">
       <AsmPreview />
     </n-grid-item>
@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts">
-import AsmPreview from "../components/AsmPreview.vue";
-import RegPreview from "../components/RegPreview.vue";
-import StackPreview from "../components/StackPreview.vue";
+import AsmPreview from "../components/preview/AsmPreview.vue";
+import RegPreview from "../components/preview/RegPreview.vue";
+import StackPreview from "../components/preview/StackPreview.vue";
 
 export default {
   components: {StackPreview, RegPreview, AsmPreview}
