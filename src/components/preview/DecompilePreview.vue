@@ -1,6 +1,6 @@
 <template>
   <n-card
-    title="NET"
+    title="反编译代码"
     bordered="true"
     embedded="true"
     style="height: 100%"
@@ -8,8 +8,8 @@
     <n-scrollbar style="height: 100%; max-height: 600px" x-scrollable="true">
       <n-config-provider :hljs="hljs">
         <n-code
-          :code="net_data.toString()"
-          language="json"
+          :code="decompile_data.toString()"
+          language="c"
         />
       </n-config-provider>
     </n-scrollbar>
@@ -17,39 +17,39 @@
 </template>
 
 <script>
-import hljs from 'highlight.js/lib/core'
-import json from 'highlight.js/lib/languages/json'
+import {defineComponent} from "vue";
+import hljs from "highlight.js/lib/core";
+import c from 'highlight.js/lib/languages/c'
+import bus from "vue3-eventbus";
 import axios from "axios";
 import global from "../../GlobalVar.vue";
-import bus from 'vue3-eventbus'
-hljs.registerLanguage('json', json)
+hljs.registerLanguage('c', c)
 
-export default {
-  name: "NetPreview",
+export default defineComponent({
+  name: "DecompilePreview",
   data() {
     return {
       hljs: hljs,
-      net_data: String
+      decompile_data: String
     }
   },
   created() {
-    this.net_data = "无信息";
     bus.on('step_update', ()=>{
-      this.net_data = axios.get('http://localhost:8088/network',
+      axios.get('http://localhost:8088/decompile',
           {params:{
               sample_name: global.sample_name,
               step_index: global.step_index,
             }
           })
           .then(res => {
-            this.net_data = res.data.toString()
+            this.decompile_data = res.data.toString();
           }).catch(err => {
             console.log(err);
           })
     })
 
   }
-}
+});
 </script>
 
 <style scoped>

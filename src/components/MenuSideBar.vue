@@ -92,10 +92,10 @@ const menuOptions: MenuOption[] = [
             RouterLink,
             {
               to: {
-                path: "/debug_asm",
+                path: "/debug_code",
               },
             },
-            { default: () => "反汇编和堆栈" }
+            { default: () => "代码" }
           ),
         key: "debug_asm",
         icon: renderIcon(DebugAsmIcon),

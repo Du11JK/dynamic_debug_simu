@@ -5,7 +5,7 @@
     embedded="true"
     style="height: 100%"
   >
-    <n-scrollbar style="height: 100%; max-height: 600px" x-scrollable="true">
+    <n-scrollbar style="height: 100%; max-height: 700px" x-scrollable="true">
       <n-config-provider :hljs="hljs">
         <n-code
           :code="asm_data.toString()"
@@ -14,6 +14,7 @@
       </n-config-provider>
     </n-scrollbar>
   </n-card>
+  <UpdateData />
 </template>
 
 <script>
@@ -23,10 +24,12 @@
   import axios from "axios";
   import global from "../../GlobalVar.vue";
   import bus from 'vue3-eventbus'
+  import UpdateData from "../UpdateData.vue";
   hljs.registerLanguage('x86asm', x86asm)
 
   export default defineComponent({
     name: "AsmPreview",
+    components: {UpdateData},
     data() {
       return {
         hljs: hljs,
@@ -35,14 +38,14 @@
     },
     created() {
       bus.on('step_update', ()=>{
-        this.asm_data = axios.get('http://localhost:8088/asm',
+        axios.get('http://localhost:8088/asm',
             {params:{
                 sample_name: global.sample_name,
                 step_index: global.step_index,
               }
             })
             .then(res => {
-              this.asm_data = res.data.toString()
+              this.asm_data = ">>\n" + res.data.toString();
             }).catch(err => {
               console.log(err);
             })

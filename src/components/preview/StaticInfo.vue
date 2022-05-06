@@ -7,36 +7,23 @@
   >
     <n-data-table
       :columns="columns"
-      :data="data"
-      :pagination="pagination"
+      :data="static_data"
       :bordered="false"
+      size="small"
     />
   </n-card>
 </template>
 
-<script lang="ts">
-import { h, defineComponent } from 'vue'
-import { NButton, useMessage, DataTableColumns } from 'naive-ui'
+<script>
 
-const data = [
-  { cols: '脱壳信息', data: '000014E0'},
-  { cols: '入口点（虚拟地址）', data: '000014E0'},
-  { cols: '入口点（实际地址）', data: '000014E0'},
-  { cols: '映像基址', data: '000014E0'},
-  { cols: '映像大小', data: '000014E0'},
-  { cols: '区段对齐', data: '000014E0'},
-  { cols: '文件对齐', data: '000014E0'},
-  { cols: '区段数目', data: '000014E0'},
-  { cols: '文件头大小', data: '000014E0'},
-  { cols: '机器类型', data: 'AMD 64'},
-  { cols: '子系统', data: 'WINDOWS CUI'},
-]
+import axios from "axios";
+import global from "../../GlobalVar.vue";
 
 export default {
   name: "StaticInfo",
-  setup () {
+  data () {
     return {
-      data,
+      static_data: [],
       columns: [
         {
           title: '字段',
@@ -47,8 +34,21 @@ export default {
           key: 'data',
         },
       ],
-      pagination: false as const
     }
+  },
+  created() {
+    axios.get('http://localhost:8088/static',
+        {params:{
+            sample_name: global.sample_name,
+          }
+        })
+        .then(res => {
+          this.static_data = res.data.map(function (item) {
+            return {cols: Object.keys(item)[0], data: Object.values(item)[0]};
+          });
+        }).catch(err => {
+      console.log(err);
+    })
   }
 }
 </script>

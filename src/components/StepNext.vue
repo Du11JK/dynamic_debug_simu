@@ -2,37 +2,48 @@
   <n-card v-show="boolShow" size="small">
     <n-space justify="center" size="large">
       <n-button strong secondary round type="warning" size="tiny" @click="handlePrevStep">
-        跳转至上一断点
+        上一步
       </n-button>
       <div style="left: 12px; right: 12px" />
       <n-button strong secondary round type="primary" size="tiny" @click="handleNextStep">
-        跳转至下一断点
+        下一步
       </n-button>
       <div style="left: 12px; right: 12px" />
       <n-button strong secondary round type="error" size="tiny" @click="handleResetSample">
-        重新加载案例
+        重新加载
       </n-button>
       <div style="left: 12px; right: 12px" />
       <n-button strong secondary round type="info" size="tiny" @click="handleHelpInfo()">
-        案例辅助信息
+        辅助信息
       </n-button>
     </n-space>
   </n-card>
-  <HelpModal ref="modalInfo" />
+  <n-drawer
+    v-model:show="info_active"
+    :width="400"
+    :placement="placement"
+  >
+    <n-drawer-content title="说明文档" closable>
+      <HelpInfo />
+    </n-drawer-content>
+  </n-drawer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { ref, defineComponent } from 'vue'
 import global from '../GlobalVar.vue'
-import HelpModal from "./preview/HelpModal.vue";
 import bus from 'vue3-eventbus'
+import type { DrawerPlacement } from 'naive-ui'
+import HelpInfo from "./preview/HelpInfo.vue";
 export default defineComponent({
   name: "StepNext",
-  components: {HelpModal},
-emits: ['step_update'],
+  components: {HelpInfo},
+  emits: ['step_update'],
   data() {
     return {
       boolShow: true,
+      info_active: ref(false),
+      placement: ref<DrawerPlacement>('right')
     }
   },
   watch:{
@@ -59,9 +70,7 @@ emits: ['step_update'],
 
     },
     handleHelpInfo() {
-      console.info('handle');
-      let modal: any = this.$refs.modalInfo
-      modal.showModal = true;
+      this.info_active = true;
     }
   }
 });

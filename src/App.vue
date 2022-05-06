@@ -29,7 +29,6 @@
 <script lang="ts" setup>
 import MenuSideBar from "./components/MenuSideBar.vue";
 import StepNext from "./components/StepNext.vue";
-
 </script>
 
 <style scoped>

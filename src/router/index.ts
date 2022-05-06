@@ -24,9 +24,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/DebugIndex.vue"), 
     },
     {
-        path: "/debug_asm",
-        name: "debug_asm",
-        component: () => import("../views/DebugAsm.vue"), 
+        path: "/debug_code",
+        name: "debug_code",
+        component: () => import("../views/DebugCode.vue"),
     },
     {
         path: "/debug_net",

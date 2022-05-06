@@ -1,45 +1,58 @@
 <template>
   <n-card
     title="memmap"
-    bordered="true"
-    embedded="true"
+    bordered
+    embedded
     style="height: 100%"
   >
     <n-scrollbar style="height: 100%; max-height: 700px" x-scrollable="true">
-      <n-config-provider :hljs="hljs">
-        <n-code
-          :code="memmap_data.toString()"
-          language="plaintext"
-        />
-      </n-config-provider>
+      <n-data-table
+        :columns="columns"
+        :data="memmap_data"
+        :bordered="false"
+        size="small"
+      />
     </n-scrollbar>
   </n-card>
 </template>
 
 <script>
-  import {defineComponent} from "vue";
-  import hljs from 'highlight.js/lib/core'
-  import plaintext from 'highlight.js/lib/languages/plaintext'
-  import axios from "axios";
-  import global from "../../GlobalVar.vue";
-  hljs.registerLanguage('plaintext', plaintext)
-  export default defineComponent({
+import {defineComponent} from "vue";
+import axios from "axios";
+import global from "../../GlobalVar.vue";
+import * as d3 from "d3-dsv";
+
+export default defineComponent({
     name: "MemMap",
     data() {
       return {
-        hljs: hljs,
-        memmap_data: String
+        memmap_data: [],
+        columns: [
+          {title: '地址', key: 'Address'},
+          {title: '大小', key: 'Size'},
+          {title: '页面信息', key: 'Info'},
+          {title: '内容', key: 'Content'},
+          {title: '页面保护', key: 'Protection'},
+          {title: '初始保护', key: 'Initial'},
+          {title: '类型', key: 'Type'}
+        ],
       }
     },
     created () {
-      this.memmap_data = axios.get('http://localhost:8088/memmap',
+      axios.get('http://localhost:8088/memmap',
           {params:{
               sample_name: global.sample_name,
-              step_index: global.step_index,
             }
           })
           .then(res => {
-            this.memmap_data = res.data
+            /*let temp = d3.csvParse(res.data);
+            let arr = [];
+            for(let i in temp){
+              if(i!=='columns'){
+                arr.push(temp[i])
+              }
+            }*/
+            this.memmap_data = d3.csvParse(res.data);
           }).catch(err => {
             console.log(err);
           })
