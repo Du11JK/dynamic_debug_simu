@@ -34,17 +34,20 @@ export default {
   },
   created() {
     bus.on('step_update', ()=>{
-      this.stack_data = axios.get('http://localhost:8088/stack',
-          {params:{
-              sample_name: global.sample_name,
-              step_index: global.step_index,
-            }
-          })
-          .then(res => {
-            this.stack_data = res.data.toString()
-          }).catch(err => {
-            console.log(err);
-          })
+      if(global.sample_type === 'asm') {
+        this.stack_data = axios.get('http://localhost:8088/stack',
+            {
+              params: {
+                sample_name: global.sample_name,
+                step_index: global.step_index,
+              }
+            })
+            .then(res => {
+              this.stack_data = res.data.toString()
+            }).catch(err => {
+              console.log(err);
+            })
+      }
     })
 
   }

@@ -1,55 +1,60 @@
 <template>
   <n-card
-    title="NET"
+    title="网络监控"
     bordered="true"
     embedded="true"
     style="height: 100%"
   >
-    <n-scrollbar style="height: 100%; max-height: 600px" x-scrollable="true">
-      <n-config-provider :hljs="hljs">
-        <n-code
-          :code="net_data.toString()"
-          language="json"
-        />
-      </n-config-provider>
+    <n-scrollbar style="height: 100%; max-height: 700px" x-scrollable="true">
+      <n-data-table
+        :columns="columns"
+        :data="net_data"
+        :bordered="false"
+        size="small"
+      />
     </n-scrollbar>
   </n-card>
 </template>
 
 <script>
-import hljs from 'highlight.js/lib/core'
-import json from 'highlight.js/lib/languages/json'
+import {defineComponent} from "vue";
 import axios from "axios";
 import global from "../../GlobalVar.vue";
-import bus from 'vue3-eventbus'
-hljs.registerLanguage('json', json)
+import * as d3 from "d3-dsv";
 
-export default {
+export default defineComponent({
   name: "NetPreview",
   data() {
     return {
-      hljs: hljs,
-      net_data: String
+      net_data: [],
+      columns: [
+        {title: '进程名', key: 'Process'},
+        {title: '进程ID', key: 'Id'},
+        {title: '模块', key: 'Module'},
+        {title: '协议', key: 'Protocol'},
+        {title: '本地地址', key: 'Local'},
+        {title: '远程地址', key: 'Remote'},
+        {title: '状态', key: 'State'}
+      ],
     }
   },
   created() {
-    this.net_data = "无信息";
-    bus.on('step_update', ()=>{
-      this.net_data = axios.get('http://localhost:8088/network',
-          {params:{
+    if (global.sample_name !== 'test') {
+      axios.get('http://localhost:8088/network',
+          {
+            params: {
               sample_name: global.sample_name,
-              step_index: global.step_index,
             }
           })
           .then(res => {
-            this.net_data = res.data.toString()
+            this.net_data = d3.csvParse(res.data);
           }).catch(err => {
-            console.log(err);
-          })
-    })
+        console.log(err);
+      })
+    }
 
   }
-}
+});
 </script>
 
 <style scoped>

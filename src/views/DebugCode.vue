@@ -1,41 +1,33 @@
 <template>
-  <n-grid :x-gap="12" :y-gap="8" :cols="5" style="height: 100%">
-    <n-grid-item span="3">
-      <component :is="type_code_preview" />
-    </n-grid-item>
-    <n-grid-item span="2">
-      <n-grid :x-gap="6" :y-gap="8" :cols="1" style="height: 100%">
-        <n-grid-item>
-          <RegPreview />
-        </n-grid-item>
-        <n-grid-item>
-          <StackPreview />
-        </n-grid-item>
-      </n-grid>
-    </n-grid-item>
-  </n-grid>
+  <component :is="type_code_preview" />
+  <UpdateData />
 </template>
 
-<script lang="ts">
-import AsmPreview from "../components/preview/AsmPreview.vue";
-import RegPreview from "../components/preview/RegPreview.vue";
-import StackPreview from "../components/preview/StackPreview.vue";
+<script>
+import AsmDebugSet from "../components/preview/AsmDebugSet.vue"
 import DecompilePreview from "../components/preview/DecompilePreview.vue";
 import global from "../GlobalVar.vue";
-
+import UpdateData from "../components/UpdateData.vue";
 export default {
-  components: {DecompilePreview, StackPreview, RegPreview, AsmPreview},
+  name: "DebugCode",
+  components: {UpdateData, AsmDebugSet, DecompilePreview},
   computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
     type_code_preview:function (){
-      if(global.sample_type == 'asm'){
-        return "AsmPreview";
+      if(global.sample_type === 'asm'){
+        return "AsmDebugSet";
       }
-      else{
+      else if(global.sample_type === 'dec'){
         return "DecompilePreview";
+      }
+      else {
+        return ""
       }
     }
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

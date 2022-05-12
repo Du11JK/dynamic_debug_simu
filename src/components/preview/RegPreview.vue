@@ -34,17 +34,20 @@ export default {
   },
   created() {
     bus.on('step_update', ()=>{
-      this.reg_data = axios.get('http://localhost:8088/reg',
-          {params:{
-              sample_name: global.sample_name,
-              step_index: global.step_index,
-            }
-          })
-          .then(res => {
-            this.reg_data = res.data.toString()
-          }).catch(err => {
-            console.log(err);
-          })
+      if(global.sample_type === 'asm') {
+        this.reg_data = axios.get('http://localhost:8088/reg',
+            {
+              params: {
+                sample_name: global.sample_name,
+                step_index: global.step_index,
+              }
+            })
+            .then(res => {
+              this.reg_data = res.data.toString()
+            }).catch(err => {
+              console.log(err);
+            })
+      }
     })
 
   }

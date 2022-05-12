@@ -1,6 +1,6 @@
 <template>
   <n-card
-    title="memmap"
+    title="内存布局"
     bordered
     embedded
     style="height: 100%"
@@ -39,27 +39,22 @@ export default defineComponent({
       }
     },
     created () {
-      axios.get('http://localhost:8088/memmap',
-          {params:{
-              sample_name: global.sample_name,
-            }
-          })
-          .then(res => {
-            /*let temp = d3.csvParse(res.data);
-            let arr = [];
-            for(let i in temp){
-              if(i!=='columns'){
-                arr.push(temp[i])
+      if (global.sample_name !== 'test') {
+        axios.get('http://localhost:8088/memmap',
+            {
+              params: {
+                sample_name: global.sample_name,
               }
-            }*/
-            this.memmap_data = d3.csvParse(res.data);
-          }).catch(err => {
-            console.log(err);
-          })
+            })
+            .then(res => {
+              this.memmap_data = d3.csvParse(res.data);
+            }).catch(err => {
+          console.log(err);
+        })
+      }
     }
   });
 </script>
 
 <style scoped>
-
 </style>

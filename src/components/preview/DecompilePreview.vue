@@ -1,8 +1,8 @@
 <template>
   <n-card
     title="反编译代码"
-    bordered="true"
-    embedded="true"
+    bordered
+    embedded
     style="height: 100%"
   >
     <n-scrollbar style="height: 100%; max-height: 600px" x-scrollable="true">
@@ -27,6 +27,7 @@ hljs.registerLanguage('c', c)
 
 export default defineComponent({
   name: "DecompilePreview",
+  components: {},
   data() {
     return {
       hljs: hljs,
@@ -35,17 +36,20 @@ export default defineComponent({
   },
   created() {
     bus.on('step_update', ()=>{
-      axios.get('http://localhost:8088/decompile',
-          {params:{
-              sample_name: global.sample_name,
-              step_index: global.step_index,
-            }
-          })
-          .then(res => {
-            this.decompile_data = res.data.toString();
-          }).catch(err => {
-            console.log(err);
-          })
+      if(global.sample_type === 'dec') {
+        axios.get('http://localhost:8088/decompile',
+            {
+              params: {
+                sample_name: global.sample_name,
+                step_index: global.step_index,
+              }
+            })
+            .then(res => {
+              this.decompile_data = res.data.toString();
+            }).catch(err => {
+          console.log(err);
+        })
+      }
     })
 
   }

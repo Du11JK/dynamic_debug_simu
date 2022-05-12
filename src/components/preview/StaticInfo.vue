@@ -37,18 +37,21 @@ export default {
     }
   },
   created() {
-    axios.get('http://localhost:8088/static',
-        {params:{
-            sample_name: global.sample_name,
-          }
-        })
-        .then(res => {
-          this.static_data = res.data.map(function (item) {
-            return {cols: Object.keys(item)[0], data: Object.values(item)[0]};
-          });
-        }).catch(err => {
-      console.log(err);
-    })
+    if (global.sample_name !== 'test') {
+      axios.get('http://localhost:8088/static',
+          {
+            params: {
+              sample_name: global.sample_name,
+            }
+          })
+          .then(res => {
+            this.static_data = res.data.map(function (item) {
+              return {cols: Object.keys(item)[0], data: Object.values(item)[0]};
+            });
+          }).catch(err => {
+        console.log(err);
+      })
+    }
   }
 }
 </script>

@@ -14,7 +14,6 @@
       </n-config-provider>
     </n-scrollbar>
   </n-card>
-  <UpdateData />
 </template>
 
 <script>
@@ -24,12 +23,11 @@
   import axios from "axios";
   import global from "../../GlobalVar.vue";
   import bus from 'vue3-eventbus'
-  import UpdateData from "../UpdateData.vue";
   hljs.registerLanguage('x86asm', x86asm)
 
   export default defineComponent({
     name: "AsmPreview",
-    components: {UpdateData},
+    components: {},
     data() {
       return {
         hljs: hljs,
@@ -38,17 +36,20 @@
     },
     created() {
       bus.on('step_update', ()=>{
-        axios.get('http://localhost:8088/asm',
-            {params:{
-                sample_name: global.sample_name,
-                step_index: global.step_index,
-              }
-            })
-            .then(res => {
-              this.asm_data = ">>\n" + res.data.toString();
-            }).catch(err => {
-              console.log(err);
-            })
+        if(global.sample_type === 'asm') {
+          axios.get('http://localhost:8088/asm',
+              {
+                params: {
+                  sample_name: global.sample_name,
+                  step_index: global.step_index,
+                }
+              })
+              .then(res => {
+                this.asm_data = ">>\n" + res.data.toString();
+              }).catch(err => {
+            console.log(err);
+          })
+        }
       })
 
     }

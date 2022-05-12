@@ -37,17 +37,19 @@ export default defineComponent({
     }
   },
   created () {
-    axios.get('http://localhost:8088/symbols',
-        {params:{
-          sample_name: global.sample_name,
-          }
-        })
-        .then(res => {
-          this.symbols_data = d3.csvParse(res.data);
-        }).catch(err => {
-          console.log(err);
-        })
-    console.info(this.symbols_data)
+    if (global.sample_name !== 'test') {
+      axios.get('http://localhost:8088/symbols',
+          {
+            params: {
+              sample_name: global.sample_name,
+            }
+          })
+          .then(res => {
+            this.symbols_data = d3.csvParse(res.data);
+          }).catch(err => {
+        console.log(err);
+      })
+    }
   }
 });
 </script>
