@@ -6,17 +6,22 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/docs_index",
         name: "docs_index",
-        component: () => import("../views/DocsIndex.vue"),  
+        component: () => import("../views/docs/DocsIndex.vue"),
     },
     {
         path: "/docs_pack",
         name: "docs_pack",
-        component: () => import("../views/DocsPack.vue"),  
+        component: () => import("../views/docs/DocsPack.vue"),
     },
     {
         path: "/docs_struct",
         name: "docs_struct",
-        component: () => import("../views/DocsStruct.vue"),  
+        component: () => import("../views/docs/DocsStruct.vue"),
+    },
+    {
+        path: "/docs_win",
+        name: "docs_win",
+        component: () => import("../views/docs/DocsWin.vue"),
     },
     {
         path: "/debug_index",

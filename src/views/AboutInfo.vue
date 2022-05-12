@@ -6,7 +6,7 @@
     size="huge"
   >
     <div style="text-align: center">
-      <p>test</p>
+      <p>PE文件动态逆向分析仿真学习系统</p>
     </div>
   </n-card>
 </template>

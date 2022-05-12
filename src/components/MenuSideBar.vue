@@ -70,6 +70,20 @@ const menuOptions: MenuOption[] = [
         key: "docs_pack",
         icon: renderIcon(DocsIcon),
       },
+      {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                  to: {
+                    path: "/docs_win",
+                  },
+                },
+                { default: () => "Windows机制" }
+            ),
+        key: "docs_win",
+        icon: renderIcon(DocsIcon),
+      },
     ],
   },
   {

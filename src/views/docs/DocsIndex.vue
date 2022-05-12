@@ -1,10 +1,12 @@
 <template>
   <VueComponent />
 </template>
-<script lang="ts">
-import { VueComponent } from '../assets/test.md'
+
+<script>
+import { VueComponent } from '../../assets/test.md'
 
 export default {
+  name: "DocsIndex",
   components: {
     VueComponent
   },
